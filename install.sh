@@ -4,7 +4,7 @@
 #Help you quickly install ASF on VPS.
 #帮助你快速地把ASF安装在VPS上面。
 #VERSION v1.5.1
-#ASF VERSION V3.2.0.5
+#ASF VERSION V3.4.0.3
 #support system :
 #Tencent Debian 8.2(OK) /Debian 9(OK) /centos 7.0(OK) / Ubuntu server 14.04.1 LTS 64bit(OK) / Ubuntu 16.04.1 LTS (OK)
 #Vultr Debian9(OK)/ Debian 8（OK） / centos 7(OK) /Ubuntu 14.04 x64（OK） /Ubuntu 16.04.3 LTS(OK)/Ubuntu 17.10 x64(OK)
@@ -35,7 +35,7 @@ source /etc/os-release
 VERSION=$(echo ${VERSION} | awk -F "[()]" '{print $2}')
 BIT=$(uname -m)
 
-ASF_VERSION="3.3.0.3"
+ASF_VERSION="3.4.0.3"
 
 Is_root() {
   if [ "$(id -u)" == 0 ]; then
