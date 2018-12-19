@@ -3,8 +3,8 @@
 #ArchiSteamFarm-Install-Script
 #Help you quickly install ASF on VPS.
 #帮助你快速地把ASF安装在VPS上面。
-#VERSION v1.5.1
-#ASF VERSION V3.4.0.3
+#VERSION v1.6.0
+#ASF VERSION V3.4.1.7
 #support system :
 #Tencent Debian 8.2(OK) /Debian 9(OK) /centos 7.0(OK) / Ubuntu server 14.04.1 LTS 64bit(OK) / Ubuntu 16.04.1 LTS (OK)
 #Vultr Debian9(OK)/ Debian 8（OK） / centos 7(OK) /Ubuntu 14.04 x64（OK） /Ubuntu 16.04.3 LTS(OK)/Ubuntu 17.10 x64(OK)
@@ -35,7 +35,7 @@ source /etc/os-release
 VERSION=$(echo ${VERSION} | awk -F "[()]" '{print $2}')
 BIT=$(uname -m)
 
-ASF_VERSION="3.4.0.3"
+ASF_VERSION="3.4.1.7"
 
 Is_root() {
   if [ "$(id -u)" == 0 ]; then
@@ -253,7 +253,7 @@ Check_system_Install_NetCore() {
     chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg
     chown root:root /etc/apt/sources.list.d/microsoft-prod.list
     apt-get update 1>/dev/null
-    apt-get install aspnetcore-runtime-2.1 -y
+    apt-get install aspnetcore-runtime-2.2 -y
     dotnet --info
     Judge "INSTALL DOTNET"
   elif [[ "${ID}" == "debian" && ${VERSION_ID} == "9" ]]; then
@@ -269,7 +269,7 @@ Check_system_Install_NetCore() {
     chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg
     chown root:root /etc/apt/sources.list.d/microsoft-prod.list
     apt-get update
-    apt-get install aspnetcore-runtime-2.1 -y --allow-unauthenticated
+    apt-get install aspnetcore-runtime-2.2 -y --allow-unauthenticated
     dotnet --info
     Judge "INSTALL DOTNET"
   elif [[ "${ID}" == "ubuntu" && $(echo "${VERSION_ID}") == "18.04" ]]; then
@@ -282,7 +282,7 @@ Check_system_Install_NetCore() {
     dpkg -i packages-microsoft-prod.deb
     apt-get install apt-transport-https
     apt-get update
-    apt-get install aspnetcore-runtime-2.1 -y
+    apt-get install aspnetcore-runtime-2.2 -y
     dotnet --info
     Judge "INSTALL DOTNET"
   elif [[ "${ID}" == "ubuntu" && $(echo "${VERSION_ID}") == "17.10" ]]; then
@@ -294,7 +294,7 @@ Check_system_Install_NetCore() {
     wget -q https://packages.microsoft.com/config/ubuntu/17.10/packages-microsoft-prod.deb
     dpkg -i packages-microsoft-prod.deb
     apt-get update
-    apt-get install aspnetcore-runtime-2.1 -y
+    apt-get install aspnetcore-runtime-2.2 -y
     dotnet --info
     Judge "INSTALL DOTNET"
   elif [[ "${ID}" == "ubuntu" && $(echo "${VERSION_ID}" | cut -d '.' -f1) -eq 16 ]]; then
@@ -306,7 +306,7 @@ Check_system_Install_NetCore() {
     wget -q https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb
     dpkg -i packages-microsoft-prod.deb
     apt-get update
-    apt-get install aspnetcore-runtime-2.1 -y
+    apt-get install aspnetcore-runtime-2.2 -y
     dotnet --info
     Judge "INSTALL DOTNET"
   elif [[ "${ID}" == "ubuntu" && $(echo "${VERSION_ID}" | cut -d '.' -f1) -eq 14 ]]; then
@@ -318,7 +318,7 @@ Check_system_Install_NetCore() {
     wget -q https://packages.microsoft.com/config/ubuntu/14.04/packages-microsoft-prod.deb
     dpkg -i packages-microsoft-prod.deb
     apt-get update
-    apt-get install aspnetcore-runtime-2.1 -y
+    apt-get install aspnetcore-runtime-2.2 -y
     dotnet --info
     Judge "INSTALL DOTNET"
   elif [[ "${ID}" == "raspbian" && $(echo "${VERSION_ID}") -eq 9 ]]; then
@@ -443,9 +443,6 @@ ArchiSteamFarm_json_language_ipc_password_choose_change() {
         "InventoryLimiterDelay": 3,
         "IPC": IPCCONFIG,
         "IPCPassword": IPCPASSWORD,
-        "IPCPrefixes": [
-                "http://*:1242/"
-		],
         "LoginLimiterDelay": 10,
         "MaxFarmingTime": 10,
         "MaxTradeHoldDuration": 15,
@@ -455,10 +452,6 @@ ArchiSteamFarm_json_language_ipc_password_choose_change() {
         "SteamProtocols": 7,
         "UpdateChannel": 0,
         "UpdatePeriod": 24,
-        "WebLimiterDelay": 200,
-        "WebProxy": null,
-        "WebProxyPassword": null,
-        "WebProxyUsername": null
 }
 EOF
   # ASF language
