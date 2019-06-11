@@ -1,5 +1,5 @@
 # ArchiSteamFarm-Install-Script
-Help you quickly install ASF on VPS. 帮助你快速地把ASF安装在VPS上面。
+Help you install ASF on VPS quickly. 帮助你快速地把ASF安装在VPS上面。
 
 ---
 - [现在支持的系统 / System support ever](#%E7%8E%B0%E5%9C%A8%E6%94%AF%E6%8C%81%E7%9A%84%E7%B3%BB%E7%BB%9F--system-support-ever)
@@ -8,7 +8,7 @@ Help you quickly install ASF on VPS. 帮助你快速地把ASF安装在VPS上面�
 - [Wiki (zh-CN)](https://github.com/zsnmwy/ArchiSteamFarm-Install-Script/wiki/v2.0-%E6%8C%87%E5%8D%97)
 ---
 
-## 现在支持的系统 / System support ever
+## 现在支持的系统 / System support ever [Only Debian 9 was tested]
 
 Raspberry Pi 2/3
 ```
@@ -20,7 +20,7 @@ Only support for x64
 
 Debian
 
-    Debian8 x64
+    √ Debian8 x64  [Tested]
     Debian9 x64
 
 Centos
@@ -34,8 +34,6 @@ Ubuntu
     Ubuntu 16 x64
     Ubuntu 14 x64
 
-These systems test on Vultr and Tencent Cloud is normal.  
-上面这些系统在Vultr和腾讯云测试正常。
 
 ---
 
