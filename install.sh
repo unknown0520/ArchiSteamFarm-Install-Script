@@ -33,7 +33,7 @@ source /etc/os-release
 VERSION=$(echo ${VERSION} | awk -F "[()]" '{print $2}')
 BIT=$(uname -m)
 
-ASF_VERSION="3.4.1.7"
+ASF_VERSION="4.0.2.2"
 
 Is_root() {
   if [ "$(id -u)" == 0 ]; then
