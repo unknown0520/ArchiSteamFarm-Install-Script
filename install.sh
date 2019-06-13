@@ -427,14 +427,10 @@ ArchiSteamFarm_Install() {
 ArchiSteamFarm_json_language_ipc_password_choose_change() {
   cat >${ARCHISTEAMFARM_FILES_DIR}/config/ASF.json <<EOF
 {
-        "AutoRestart": true,
+        "SteamOwnerID": STEAMID,
         "CurrentCulture": LANGUAGE,
         "IPC": IPCCONFIG,
-        "IPCPassword": IPCPASSWORD,
-        "SteamOwnerID": STEAMID,
-        "SteamProtocols": 7,
-        "UpdateChannel": 0,
-        "UpdatePeriod": 24,
+        "IPCPassword": IPCPASSWORD
 }
 EOF
   # ASF language
