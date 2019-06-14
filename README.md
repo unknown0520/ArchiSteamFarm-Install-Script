@@ -20,8 +20,8 @@ Only support for x64
 
 Debian
 
-    √ Debian8 x64  [Tested]
-    Debian9 x64
+    Debian8 x64
+    √ Debian9 x64  [Tested]
 
 Centos
 
