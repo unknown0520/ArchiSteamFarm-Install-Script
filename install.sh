@@ -3,8 +3,8 @@
 #ArchiSteamFarm-Install-Script
 #Help you install ASF on VPS quickly.
 #帮助你快速地把ASF安装在VPS上面。
-#VERSION v1.7.1
-#ASF VERSION V4.0.2.7
+#VERSION v1.8.0
+#ASF VERSION V4.1.1.3
 #support system :
 #Only tested on GCE Debian 9(OK)
 
@@ -33,7 +33,7 @@ source /etc/os-release
 VERSION=$(echo ${VERSION} | awk -F "[()]" '{print $2}')
 BIT=$(uname -m)
 
-ASF_VERSION="4.0.2.7"
+ASF_VERSION="4.1.1.3"
 
 Is_root() {
   if [ "$(id -u)" == 0 ]; then
@@ -235,7 +235,7 @@ Check_system_Install_NetCore() {
     echo -e "${OK} ${GreenBG} 当前系统为 Centos ${VERSION_ID} ${VERSION} ${Font} "
     rpm -Uvh https://packages.microsoft.com/config/rhel/7/packages-microsoft-prod.rpm
     yum update -y 1>/dev/null
-    yum install -y unzip curl libunwind libicu wget unzip screen lttng-ust libcurl openssl-libs libuuid krb5-libs zlib lsof aspnetcore-runtime-2.2 psmisc
+    yum install -y unzip curl libunwind libicu wget unzip screen lttng-ust libcurl openssl-libs libuuid krb5-libs zlib lsof aspnetcore-runtime-3.1 psmisc
     dotnet --info
     Judge "INSTALL DOTNET"
   elif [[ "${ID}" == "debian" && ${VERSION_ID} == "8" ]]; then
@@ -251,7 +251,7 @@ Check_system_Install_NetCore() {
     chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg
     chown root:root /etc/apt/sources.list.d/microsoft-prod.list
     apt-get update 1>/dev/null
-    apt-get install dotnet-sdk-2.2 -y
+    apt-get install dotnet-sdk-3.1 -y
     dotnet --info
     Judge "INSTALL DOTNET"
   elif [[ "${ID}" == "debian" && ${VERSION_ID} == "9" ]]; then
@@ -267,7 +267,7 @@ Check_system_Install_NetCore() {
     chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg
     chown root:root /etc/apt/sources.list.d/microsoft-prod.list
     apt-get update
-    apt-get install dotnet-sdk-2.2 -y --allow-unauthenticated
+    apt-get install dotnet-sdk-3.1 -y --allow-unauthenticated
     dotnet --info
     Judge "INSTALL DOTNET"
   elif [[ "${ID}" == "ubuntu" && $(echo "${VERSION_ID}") == "18.04" ]]; then
@@ -280,7 +280,7 @@ Check_system_Install_NetCore() {
     dpkg -i packages-microsoft-prod.deb
     apt-get install apt-transport-https
     apt-get update
-    apt-get install aspnetcore-runtime-2.2 -y
+    apt-get install aspnetcore-runtime-3.1 -y
     dotnet --info
     Judge "INSTALL DOTNET"
   elif [[ "${ID}" == "ubuntu" && $(echo "${VERSION_ID}") == "17.10" ]]; then
@@ -292,7 +292,7 @@ Check_system_Install_NetCore() {
     wget -q https://packages.microsoft.com/config/ubuntu/17.10/packages-microsoft-prod.deb
     dpkg -i packages-microsoft-prod.deb
     apt-get update
-    apt-get install aspnetcore-runtime-2.2 -y
+    apt-get install aspnetcore-runtime-3.1 -y
     dotnet --info
     Judge "INSTALL DOTNET"
   elif [[ "${ID}" == "ubuntu" && $(echo "${VERSION_ID}" | cut -d '.' -f1) -eq 16 ]]; then
@@ -304,7 +304,7 @@ Check_system_Install_NetCore() {
     wget -q https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb
     dpkg -i packages-microsoft-prod.deb
     apt-get update
-    apt-get install aspnetcore-runtime-2.2 -y
+    apt-get install aspnetcore-runtime-3.1 -y
     dotnet --info
     Judge "INSTALL DOTNET"
   elif [[ "${ID}" == "ubuntu" && $(echo "${VERSION_ID}" | cut -d '.' -f1) -eq 14 ]]; then
@@ -316,7 +316,7 @@ Check_system_Install_NetCore() {
     wget -q https://packages.microsoft.com/config/ubuntu/14.04/packages-microsoft-prod.deb
     dpkg -i packages-microsoft-prod.deb
     apt-get update
-    apt-get install aspnetcore-runtime-2.2 -y
+    apt-get install aspnetcore-runtime-3.1 -y
     dotnet --info
     Judge "INSTALL DOTNET"
   elif [[ "${ID}" == "raspbian" && $(echo "${VERSION_ID}") -eq 9 ]]; then
