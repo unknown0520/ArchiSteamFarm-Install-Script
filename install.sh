@@ -4,7 +4,7 @@
 #Help you install ASF on VPS quickly.
 #帮助你快速地把ASF安装在VPS上面。
 #VERSION v1.8.0
-#ASF VERSION V4.2.0.6
+#ASF VERSION V4.2.2.0
 #support system :
 #Only tested on GCE Debian 9(OK)
 
@@ -33,7 +33,7 @@ source /etc/os-release
 VERSION=$(echo ${VERSION} | awk -F "[()]" '{print $2}')
 BIT=$(uname -m)
 
-ASF_VERSION="4.2.0.6"
+ASF_VERSION="4.2.2.0"
 
 Is_root() {
   if [ "$(id -u)" == 0 ]; then
