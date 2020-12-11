@@ -481,7 +481,7 @@ Remove_all_file() {
 }
 
 ADD_asf_to_bin() {
-  wget 'https://raw.githubusercontent.com/zsnmwy/ArchiSteamFarm-Install-Script/master/asf' -P '/bin'
+  wget 'https://raw.githubusercontent.com/unknown0520/ArchiSteamFarm-Install-Script/master/asf' -P '/bin'
   Judge "Download asf to bin"
   chmod 777 '/bin/asf'
 }
@@ -490,7 +490,7 @@ ADD_asf_auto_compelete_to_bash_path(){
   if [[ -f '/etc/bash_completion.d/asf_auto_complete' ]]; then
     rm -rf '/etc/bash_completion.d/asf_auto_complete'
   fi
-  wget 'https://raw.githubusercontent.com/zsnmwy/ArchiSteamFarm-Install-Script/master/asf_auto_complete' -P '/etc/bash_completion.d/'
+  wget 'https://raw.githubusercontent.com/unknown0520/ArchiSteamFarm-Install-Script/master/asf_auto_complete' -P '/etc/bash_completion.d/'
   Judge "Download asf_auto_complete to /etc/bash_completion.d/"
   echo "source /etc/bash_completion.d/asf_auto_complete" >> /etc/bash.bashrc
   echo "source /etc/bash_completion.d/asf_auto_complete" >> /etc/bashrc
