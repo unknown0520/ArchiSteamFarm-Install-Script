@@ -243,7 +243,7 @@ Check_system_Install_NetCore() {
     echo "这里是Debian8的配置"
     echo -e "${OK} ${GreenBG} 当前系统为 Debian ${VERSION_ID} ${Font} "
     apt-get update 1>/dev/null
-    apt-get install -y curl libunwind8 gettext apt-transport-https wget unzip screen liblttng-ust0 libcurl3 libssl1.0.0 libuuid1 libkrb5-3 zlib1g lsof psmisc
+    apt-get install -y curl libunwind8 gettext apt-transport-https wget unzip screen liblttng-ust0 libcurl4 libssl1.0.0 libuuid1 libkrb5-3 zlib1g lsof psmisc
     wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor >microsoft.asc.gpg
     mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/
     wget -q https://packages.microsoft.com/config/debian/8/prod.list
@@ -259,7 +259,7 @@ Check_system_Install_NetCore() {
     echo "这里是Debian9的配置"
     echo -e "${OK} ${GreenBG} 当前系统为 Debian ${VERSION_ID} ${Font} "
     apt-get update 1>/dev/null
-    apt-get install -y curl libunwind8 gettext apt-transport-https wget unzip screen liblttng-ust0 libcurl3 libssl1.0.2 libuuid1 libkrb5-3 zlib1g lsof psmisc
+    apt-get install -y curl libunwind8 gettext apt-transport-https wget unzip screen liblttng-ust0 libcurl4 libssl1.0.2 libuuid1 libkrb5-3 zlib1g lsof psmisc
     ## 用于安装 .Net
     wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor >microsoft.asc.gpg
     mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/
@@ -274,10 +274,10 @@ Check_system_Install_NetCore() {
     #尝试 Debian 10 的支持
   elif [[ "${ID}" == "debian" && ${VERSION_ID} == "10" ]]; then
     ## Debian 10
-    echo "这里是Debian9的配置"
+    echo "这里是Debian10的配置"
     echo -e "${OK} ${GreenBG} 当前系统为 Debian ${VERSION_ID} ${Font} "
     apt-get update 1>/dev/null
-    apt-get install -y curl libunwind8 gettext apt-transport-https wget unzip screen liblttng-ust0 libcurl3 libssl1.0.2 libuuid1 libkrb5-3 zlib1g lsof psmisc
+    apt-get install -y curl libunwind8 gettext apt-transport-https wget unzip screen liblttng-ust0 libcurl4 libssl1.0.2 libuuid1 libkrb5-3 zlib1g lsof psmisc
     ## 用于安装 .Net
     wget https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
     sudo dpkg -i packages-microsoft-prod.deb
@@ -315,7 +315,7 @@ Check_system_Install_NetCore() {
     echo "这里是Ubuntu 16的配置"
     echo -e "${OK} ${GreenBG} 当前系统为 Ubuntu ${VERSION_ID} ${VERSION} ${Font} "
     DEBIAN_FRONTEND=noninteractive apt-get update 1>/dev/null
-    DEBIAN_FRONTEND=noninteractive apt-get install curl wget unzip screen apt-transport-https libunwind8 liblttng-ust0 libcurl3 libssl1.0.0 libuuid1 libkrb5-3 zlib1g libicu55 lsof psmisc -y
+    DEBIAN_FRONTEND=noninteractive apt-get install curl wget unzip screen apt-transport-https libunwind8 liblttng-ust0 libcurl4 libssl1.0.0 libuuid1 libkrb5-3 zlib1g libicu55 lsof psmisc -y
     wget -q https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb
     dpkg -i packages-microsoft-prod.deb
     apt-get update
@@ -327,7 +327,7 @@ Check_system_Install_NetCore() {
     echo "这里是Ubuntu 14的配置"
     echo -e "${OK} ${GreenBG} 当前系统为 Ubuntu ${VERSION_ID} ${VERSION} ${Font} "
     apt-get update 1>/dev/null
-    apt-get install curl wget unzip screen apt-transport-https libunwind8 liblttng-ust0 libcurl3 libssl1.0.0 libuuid1 libkrb5-3 zlib1g libicu52 lsof psmisc -y
+    apt-get install curl wget unzip screen apt-transport-https libunwind8 liblttng-ust0 libcurl4 libssl1.0.0 libuuid1 libkrb5-3 zlib1g libicu52 lsof psmisc -y
     wget -q https://packages.microsoft.com/config/ubuntu/14.04/packages-microsoft-prod.deb
     dpkg -i packages-microsoft-prod.deb
     apt-get update
@@ -541,10 +541,10 @@ case $1 in
 
 
   if ! dotnet --info 1>/dev/null; then
-    echo -e "${Info} ${RedBG}  Can't find the dotnet. Now install... ${Font}"
+    echo -e "${Info} ${RedBG}  未找到 .Net，开始安装 ...${Font}"
     Check_system_Install_NetCore
   else
-    echo -e "${OK} ${GreenBG} dotnet --- ok ${Font}"
+    echo -e "${OK} ${GreenBG} .Net 就绪 ${Font}"
   fi
 
 
@@ -573,10 +573,10 @@ case $1 in
   Steam_information_account_Get
   Choose_language
   if ! dotnet --info 1>/dev/null; then
-    echo -e "${Info} ${RedBG}  Can't find the dotnet. Now install... ${Font}"
+    echo -e "${Info} ${RedBG}  未找到 .Net，开始安装 ...${Font}"
     Check_system_Install_NetCore
   else
-    echo -e "${OK} ${GreenBG} dotnet --- ok ${Font}"
+    echo -e "${OK} ${GreenBG} .Net 就绪 ${Font}"
   fi
   ArchiSteamFarm_Install
   ArchiSteamFarm_json_language_ipc_password_choose_change
