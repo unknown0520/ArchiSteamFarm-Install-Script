@@ -271,20 +271,6 @@ Check_system_Install_NetCore() {
     apt-get install dotnet-sdk-5.0 -y --allow-unauthenticated
     dotnet --info
     Judge "INSTALL DOTNET"
-    #尝试 Debian 10 的支持
-  elif [[ "${ID}" == "debian" && ${VERSION_ID} == "10" ]]; then
-    ## Debian 10
-    echo "这里是Debian10的配置"
-    echo -e "${OK} ${GreenBG} 当前系统为 Debian ${VERSION_ID} ${Font} "
-    apt-get update 1>/dev/null
-    apt-get install -y curl libunwind8 gettext apt-transport-https wget unzip screen liblttng-ust0 libcurl4 libssl1.0.2 libuuid1 libkrb5-3 zlib1g lsof psmisc
-    ## 用于安装 .Net
-    wget https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-    sudo dpkg -i packages-microsoft-prod.deb
-    apt-get update
-    apt-get install dotnet-sdk-5.0 -y --allow-unauthenticated
-    dotnet --info
-    Judge "INSTALL DOTNET"
   elif [[ "${ID}" == "ubuntu" && $(echo "${VERSION_ID}") == "18.04" ]]; then
     ## Ubuntu 18.04
     echo "这里是Ubuntu 18.04的配置"
