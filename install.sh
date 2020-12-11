@@ -3,8 +3,8 @@
 #ArchiSteamFarm-Install-Script
 #Help you install ASF on VPS quickly.
 #帮助你快速地把ASF安装在VPS上面。
-#VERSION v1.8.0
-#ASF VERSION V4.2.4.0
+#VERSION v1.9.0
+#ASF VERSION V5.0.0.5
 #support system :
 #Only tested on GCE Debian 9(OK)
 
@@ -33,7 +33,7 @@ source /etc/os-release
 VERSION=$(echo ${VERSION} | awk -F "[()]" '{print $2}')
 BIT=$(uname -m)
 
-ASF_VERSION="4.2.4.0"
+ASF_VERSION="5.0.0.5"
 
 Is_root() {
   if [ "$(id -u)" == 0 ]; then
@@ -251,7 +251,7 @@ Check_system_Install_NetCore() {
     chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg
     chown root:root /etc/apt/sources.list.d/microsoft-prod.list
     apt-get update 1>/dev/null
-    apt-get install dotnet-sdk-3.1 -y
+    apt-get install dotnet-sdk-5.0 -y
     dotnet --info
     Judge "INSTALL DOTNET"
   elif [[ "${ID}" == "debian" && ${VERSION_ID} == "9" ]]; then
@@ -260,6 +260,7 @@ Check_system_Install_NetCore() {
     echo -e "${OK} ${GreenBG} 当前系统为 Debian ${VERSION_ID} ${Font} "
     apt-get update 1>/dev/null
     apt-get install -y curl libunwind8 gettext apt-transport-https wget unzip screen liblttng-ust0 libcurl3 libssl1.0.2 libuuid1 libkrb5-3 zlib1g lsof psmisc
+    ## 用于安装 .Net
     wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor >microsoft.asc.gpg
     mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/
     wget -q https://packages.microsoft.com/config/debian/9/prod.list
@@ -267,7 +268,21 @@ Check_system_Install_NetCore() {
     chown root:root /etc/apt/trusted.gpg.d/microsoft.asc.gpg
     chown root:root /etc/apt/sources.list.d/microsoft-prod.list
     apt-get update
-    apt-get install dotnet-sdk-3.1 -y --allow-unauthenticated
+    apt-get install dotnet-sdk-5.0 -y --allow-unauthenticated
+    dotnet --info
+    Judge "INSTALL DOTNET"
+    #尝试 Debian 10 的支持
+  elif [[ "${ID}" == "debian" && ${VERSION_ID} == "10" ]]; then
+    ## Debian 10
+    echo "这里是Debian9的配置"
+    echo -e "${OK} ${GreenBG} 当前系统为 Debian ${VERSION_ID} ${Font} "
+    apt-get update 1>/dev/null
+    apt-get install -y curl libunwind8 gettext apt-transport-https wget unzip screen liblttng-ust0 libcurl3 libssl1.0.2 libuuid1 libkrb5-3 zlib1g lsof psmisc
+    ## 用于安装 .Net
+    wget https://packages.microsoft.com/config/debian/10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+    sudo dpkg -i packages-microsoft-prod.deb
+    apt-get update
+    apt-get install dotnet-sdk-5.0 -y --allow-unauthenticated
     dotnet --info
     Judge "INSTALL DOTNET"
   elif [[ "${ID}" == "ubuntu" && $(echo "${VERSION_ID}") == "18.04" ]]; then
@@ -280,7 +295,7 @@ Check_system_Install_NetCore() {
     dpkg -i packages-microsoft-prod.deb
     apt-get install apt-transport-https
     apt-get update
-    apt-get install aspnetcore-runtime-3.1 -y
+    apt-get install aspnetcore-runtime-5.0 -y
     dotnet --info
     Judge "INSTALL DOTNET"
   elif [[ "${ID}" == "ubuntu" && $(echo "${VERSION_ID}") == "17.10" ]]; then
@@ -292,7 +307,7 @@ Check_system_Install_NetCore() {
     wget -q https://packages.microsoft.com/config/ubuntu/17.10/packages-microsoft-prod.deb
     dpkg -i packages-microsoft-prod.deb
     apt-get update
-    apt-get install aspnetcore-runtime-3.1 -y
+    apt-get install aspnetcore-runtime-5.0 -y
     dotnet --info
     Judge "INSTALL DOTNET"
   elif [[ "${ID}" == "ubuntu" && $(echo "${VERSION_ID}" | cut -d '.' -f1) -eq 16 ]]; then
@@ -304,7 +319,7 @@ Check_system_Install_NetCore() {
     wget -q https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb
     dpkg -i packages-microsoft-prod.deb
     apt-get update
-    apt-get install aspnetcore-runtime-3.1 -y
+    apt-get install aspnetcore-runtime-5.0 -y
     dotnet --info
     Judge "INSTALL DOTNET"
   elif [[ "${ID}" == "ubuntu" && $(echo "${VERSION_ID}" | cut -d '.' -f1) -eq 14 ]]; then
@@ -316,7 +331,7 @@ Check_system_Install_NetCore() {
     wget -q https://packages.microsoft.com/config/ubuntu/14.04/packages-microsoft-prod.deb
     dpkg -i packages-microsoft-prod.deb
     apt-get update
-    apt-get install aspnetcore-runtime-3.1 -y
+    apt-get install aspnetcore-runtime-5.0 -y
     dotnet --info
     Judge "INSTALL DOTNET"
   elif [[ "${ID}" == "raspbian" && $(echo "${VERSION_ID}") -eq 9 ]]; then
@@ -385,15 +400,15 @@ Raspberry_Pi_Install_Dotnet() {
   done
 }
 
-Install_nvm_node_V8.11.1_PM2() {
+Install_nvm_node_V15.4.0_PM2() {
   echo -e "${Info} ${GreenBG} nvm安装阶段 ${Font}"
-  wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash 1>/dev/null #This install nvm
+  wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash 1>/dev/null #This install nvm
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
   echo -e "${Info} ${GreenBG} node安装阶段 ${Font}"
-  nvm install 8.11.1 # This install node v8.11.1
-  nvm use 8.11.1
+  nvm install 15.4.0 # This install node v15.4.0
+  nvm use 15.4.0
   node -v # Show node version
   echo -e "${Info} ${GreenBG} pm2安装阶段 ${Font}"
   npm i -g pm2 1>/dev/null # This install pm2
@@ -536,7 +551,7 @@ case $1 in
   ArchiSteamFarm_Install
   ArchiSteamFarm_json_language_ipc_password_choose_change
   Bot_Add
-  Install_nvm_node_V8.11.1_PM2
+  Install_nvm_node_V15.4.0_PM2
   #ADD_asf_to_bin
 
 
@@ -566,7 +581,7 @@ case $1 in
   ArchiSteamFarm_Install
   ArchiSteamFarm_json_language_ipc_password_choose_change
   Bot_Add
-  Install_nvm_node_V8.11.1_PM2
+  Install_nvm_node_V15.4.0_PM2
   ADD_asf_to_bin
   ADD_asf_auto_compelete_to_bash_path
   dotnet /opt/ArchiSteamFarm/ArchiSteamFarm.dll
