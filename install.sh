@@ -259,7 +259,8 @@ Check_system_Install_NetCore() {
     echo "这里是Debian9的配置"
     echo -e "${OK} ${GreenBG} 当前系统为 Debian ${VERSION_ID} ${Font} "
     apt-get update 1>/dev/null
-    apt-get install -y curl libunwind8 gettext apt-transport-https wget unzip screen liblttng-ust0 libcurl4 libssl1.0.2 libuuid1 libkrb5-3 zlib1g lsof psmisc
+    apt-get install -y unzip
+    apt-get install -y curl libunwind8 gettext apt-transport-https wget screen liblttng-ust0 libcurl4 libssl1.0.2 libuuid1 libkrb5-3 zlib1g lsof psmisc
     ## 用于安装 .Net
     wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor >microsoft.asc.gpg
     mv microsoft.asc.gpg /etc/apt/trusted.gpg.d/
