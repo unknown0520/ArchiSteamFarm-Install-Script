@@ -404,6 +404,7 @@ Install_nvm_node_V15.4.0_PM2() {
 
 ArchiSteamFarm_Install() {
   while true; do
+    apt-get install unzip -y
     echo -e "${Info} ${GreenBG} 获取 ArchiSteamFarm 最新稳定版 ${Font}"
     #wget --no-check-certificate -O ArchiSteamFarm.zip $(curl -s 'https://api.github.com/repos/JustArchi/ArchiSteamFarm/releases/latest' | grep -Po '"browser_download_url": "\K.*?(?=")' | grep generic)
     wget -q --no-check-certificate -O "ArchiSteamFarm.zip" "https://github.com/JustArchi/ArchiSteamFarm/releases/download/${ASF_VERSION}/ASF-generic.zip"
