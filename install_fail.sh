@@ -1268,7 +1268,7 @@ General_install() {
 	Check_install_ArchiSteamFarm
 	Qcloud_source
 	Check_system_Install_NetCore
-	Install_nvm_node_V8.11.1_PM2
+	Install_nvm_node_V15.4.0_PM2
 	ArchiSteamFarm_Install
 	Bot_Add
 	Add_start_script_pm2_bash
