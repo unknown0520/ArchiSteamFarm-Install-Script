@@ -9,7 +9,7 @@
 #Vultr Debian9(OK)/ Debian 8（OK） / centos 7(OK) /Ubuntu 14.04 x64（OK） /Ubuntu 16.04.3 LTS(OK)/Ubuntu 17.10 x64(OK)
 #兼容SSR centos7 doub脚本
 
-PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin:/opt/ArchiSteamFarm:/opt/Manage_ArchiSteamFarm:/root/.nvm/versions/node/v8.11.1/bin
+PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin:/opt/ArchiSteamFarm:/opt/Manage_ArchiSteamFarm:/root/.nvm/versions/node/v15.4.0/bin
 export PATH
 
 # fonts color
@@ -435,7 +435,7 @@ Check_system_Install_NetCore() {
 		echo 'exclude=*preview*' >>/etc/yum.repos.d/dotnetdev.repo
 		yum update -y
 		yum install -y unzip curl libunwind libicu wget unzip screen lttng-ust libcurl openssl-libs libuuid krb5-libs zlib lsof
-		yum install -y dotnet-sdk-2.0.0 --nogpgcheck
+		yum install -y dotnet-sdk-5.0 --nogpgcheck
 		export PATH=$PATH:$HOME/dotnet
 		dotnet --version
 		echo -e "${Info} ${GreenBG} 若出现dotnet的版本号 为安装正常 ${Font}"
@@ -456,7 +456,7 @@ Check_system_Install_NetCore() {
 		mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
 		sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-jessie-prod jessie main" > /etc/apt/sources.list.d/dotnetdev.list'
 		apt-get update
-		apt-get install dotnet-sdk-2.0.0 -y
+		apt-get install dotnet-sdk-5.0 -y
 		export PATH=$PATH:$HOME/dotnet
 		dotnet --version
 		echo -e "${Info} ${GreenBG} 若出现dotnet的版本号 为安装正常 ${Font}"
@@ -477,7 +477,7 @@ Check_system_Install_NetCore() {
 		mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
 		sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-stretch-prod stretch main" > /etc/apt/sources.list.d/dotnetdev.list'
 		apt-get update
-		apt-get install dotnet-sdk-2.0.0 -y
+		apt-get install dotnet-sdk-5.0 -y
 		export PATH=$PATH:$HOME/dotnet
 		dotnet --version
 		echo -e "${Info} ${GreenBG} 若出现dotnet的版本号 为安装正常 ${Font}"
@@ -646,16 +646,16 @@ Is_root() {
 	fi
 }
 
-Install_nvm_node_V8.11.1_PM2() {
+Install_nvm_node_V15.4.0_PM2() {
 	${INS} update
 	${INS} install wget -y
 	echo -e "${Info} ${GreenBG} nvm安装阶段 ${Font}"
-	wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash #This install nvm
+	wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash #This install nvm
 	export NVM_DIR="$HOME/.nvm"
 	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
 	[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 	echo -e "${Info} ${GreenBG} node安装阶段 ${Font}"
-	nvm install 8.11.1 # This install node v8.11.1
+	nvm install 15.4.0 # This install node v15.4.0
 	node -v            # Show node version
 	#npm i -g nrm                                                       # Use npm install nrm
 	#if [[ ${nrm_enable}="1" ]] ;then
@@ -824,9 +824,7 @@ ArchiSteamFarm_json_English_change_to_zh-CN() {
 	cat >${ARCHISTEAMFARM_FILES_DIR}/config/ASF.json <<EOF
 {
 	"AutoRestart": true,
-	"BackgroundGCPeriod": 0,
-	"Blacklist": [],
-	"ConfirmationsLimiterDelay": 10,
+	"ConfirmationsLimiterDelay": 15,
 	"ConnectionTimeout": 60,
 	"CurrentCulture": "zh-CN",
 	"Debug": false,
@@ -834,20 +832,14 @@ ArchiSteamFarm_json_English_change_to_zh-CN() {
 	"GiftsLimiterDelay": 1,
 	"Headless": false,
 	"IdleFarmingPeriod": 8,
-	"InventoryLimiterDelay": 3,
+	"InventoryLimiterDelay": 5,
 	"IPCPassword": null,
 	"IPCPrefixes": [
 		"http://127.0.0.1:1242/"
 	],
-	"LoginLimiterDelay": 10,
-	"MaxFarmingTime": 10,
-	"MaxTradeHoldDuration": 15,
-	"OptimizationMode": 0,
-	"Statistics": true,
 	"SteamOwnerID": SteamID,
-	"SteamProtocols": 1,
 	"UpdateChannel": 1,
-	"UpdatePeriod": 24
+	"UpdatePeriod": 0
 }
 EOF
 	sed -i 's#SteamID#'"$(echo ${Steam_account_SteamOwnerID_second})"'#' ${ARCHISTEAMFARM_FILES_DIR}/config/ASF.json
